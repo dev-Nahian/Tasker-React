@@ -6,7 +6,7 @@ import TaskBoard from "./task/TaskBoard";
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="flex flex-col justify-center items-center">
         <HeroSection />
         <TaskBoard />

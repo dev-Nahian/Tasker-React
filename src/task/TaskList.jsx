@@ -1,4 +1,4 @@
-export default function TaskList({ tasks }) {
+export default function TaskList({ tasks, onEdit, onDelete }) {
   return (
     <div className="overflow-auto">
       <table className="table-fixed overflow-auto xl:w-full">
@@ -71,8 +71,7 @@ export default function TaskList({ tasks }) {
               <td>{task?.title}</td>
               <td>
                 <div>
-                  Connect an existing API to a third-party database using secure
-                  methods and handle data exchange efficiently.
+                  {task.description}
                 </div>
               </td>
               <td>
@@ -96,11 +95,11 @@ export default function TaskList({ tasks }) {
                   </li> */}
                 </ul>
               </td>
-              <td className="text-center">{task?.Priority}</td>
+              <td className="text-center">{task.priority}</td>
               <td>
                 <div className="flex items-center justify-center space-x-3">
-                  <button className="text-red-500">Delete</button>
-                  <button className="text-blue-500">Edit</button>
+                  <button className="text-red-500 cursor-pointer" onClick={()=> onDelete(task.id)}>Delete</button>
+                  <button className="text-blue-500 cursor-pointer" onClick={()=> onEdit(task)}>Edit</button>
                 </div>
               </td>
             </tr>
