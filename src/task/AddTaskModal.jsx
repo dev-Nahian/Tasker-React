@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddTaskModal({onSave, taskToUpdate, onCloseClick}) {
+export default function AddTaskModal({onAdd, taskToUpdate, handleOnClose}) {
 
   const [newTask, setNewTask] = useState(taskToUpdate || {
     id: crypto.randomUUID(),
@@ -11,25 +11,25 @@ export default function AddTaskModal({onSave, taskToUpdate, onCloseClick}) {
     isFavorite: false,
   });
 
-  const [ isAdd, setIsAdd ] = useState(Object.is(taskToUpdate, null))
+  const [isAdd, setIsAdd] = useState(Object.is(taskToUpdate, null))
 
   const handleChange = (evt) => {
-    const name = evt.target.name
-    let value = evt.target.value
+    const name = evt.target.name;
+    let value = evt.target.value;
 
     if(name === 'tags'){
-        value = value.split(",")
+      value = value.split(',')
     }
 
     setNewTask({
-        ...newTask,
-        [name]: value
-    })
-  }
+      ...newTask,
+      [name]: value,
+    });
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    onSave(newTask,isAdd)
+    onAdd(newTask, isAdd)
   }
 
 
@@ -48,9 +48,9 @@ export default function AddTaskModal({onSave, taskToUpdate, onCloseClick}) {
               className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
               type="text"
               name="title"
-              id="title"
               value={newTask.title}
               onChange={handleChange}
+              id="title"
               required
             />
           </div>
@@ -102,10 +102,7 @@ export default function AddTaskModal({onSave, taskToUpdate, onCloseClick}) {
         </div>
 
         <div className="mt-16 flex flex-row-reverse justify-center gap-2 lg:mt-20">
-          <button
-            className="rounded bg-red-600 px-4 py-2 text-white transition-all hover:opacity-80"
-            onClick={onCloseClick}
-          >
+          <button onClick={handleOnClose} className="rounded bg-red-600 px-4 py-2 text-white transition-all hover:opacity-80">
             Close
           </button>
           <button
